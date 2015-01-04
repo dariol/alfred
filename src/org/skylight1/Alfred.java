@@ -1,4 +1,4 @@
-package example.simpletts;
+package org.skylight1;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -39,6 +39,7 @@ public class Alfred extends Activity
     private String oauthToken = null;
 	private boolean commandMode;
 	public boolean isResponse;
+	private HKService hkservice;
     
     /** 
      * Called when the activity is first created.  This is where we'll hook up 
@@ -51,6 +52,9 @@ public class Alfred extends Activity
         
         setContentView(R.layout.speech);
         
+        hkservice = new HKService(this);
+        //hkservice.sendConnect(); // currently works with only a hard coded track
+        
         audioPlayer = new AudioPlayer(this);
         
         speakButton = (Button)findViewById(R.id.speak_button);
@@ -61,9 +65,10 @@ public class Alfred extends Activity
         });        
         // This will show the recognized text.
         resultView = (TextView)findViewById(R.id.result);
-        
+ 
+// if first time:
 //        alert("note", "pair or wake the bluetooth speaker");
-        //setupSpeechService();
+        setupSpeechService();
         
     }
 	private void startListening() {		
@@ -74,7 +79,7 @@ public class Alfred extends Activity
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        setupSpeechService();
+//        setupSpeechService();
         ATTSpeechService speechService = getSpeechService();
         speechService.startListening();            				
 	}
@@ -271,9 +276,11 @@ public class Alfred extends Activity
     		if(resultText.contains(" ")) {
     			resultText = (resultText.split(" "))[0];
     		}
-	        if(resultText.equals("alfred")||resultText.equals("albert")||resultText.equals("howard")
+	        if(resultText.equals("ok")||resultText.equals("okay")||resultText.equals("ohk")||resultText.equals("O.K.")
+	        		||resultText.equals("alfred")||resultText.equals("albert")||resultText.equals("howard")
 	        		||resultText.equals("after")||resultText.equals("often")||resultText.equals("office")
 	        		||resultText.equals("ali")) {
+	        	//hkservice.sendPause(); // currently works with only a hard coded track
 	        	Intent intent = new Intent("com.android.music.musicservicecommand");
 	        	intent.putExtra("command", "pause");
 	        	sendBroadcast(intent);
@@ -291,9 +298,10 @@ public class Alfred extends Activity
     		if(resultText.startsWith("play")) {
     			if(name==null) {
 	    			commandMode = false;
+	    			//kservice.sendPause(); // currently works with only a hard coded track
 		        	Intent intent = new Intent("com.android.music.musicservicecommand");
 		        	intent.putExtra("command", "play");
-		        	sendBroadcast(intent);    			
+		        	sendBroadcast(intent);
     			} else {
     				playSearchArtist(name);
     			}

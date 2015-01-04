@@ -4,7 +4,7 @@ TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION: http://developer.a
 Copyright 2012 AT&T Intellectual Property. All rights reserved. 
 For more information contact developer.support@att.com http://developer.att.com
 */
-package example.simpletts;
+package org.skylight1;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

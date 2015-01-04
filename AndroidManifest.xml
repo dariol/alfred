@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="example.simpletts"
-    android:versionCode="2"
-    android:versionName="1.6" >
+    package="org.skylight1"
+    android:versionCode="3"
+    android:versionName="1.0" >
 
     <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="8"/>
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -12,7 +12,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:allowBackup="false">
-        <activity android:name=".Alfred"
+        <activity android:name="org.skylight1.Alfred"
             android:label="@string/app_name"
             android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|fontScale">
             <intent-filter >
