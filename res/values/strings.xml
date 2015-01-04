@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Alfred</string>
+    <string name="speak_button">reset</string>
+    <string name="speak_button_wait">Please wait</string>
+    <string name="greeting">Hi, Alfred.  Is away.  Ill be at your service</string>
+    <string name="response_format">Yes, master?</string>
+    <string name="result"> </string>
+</resources>
