@@ -66,8 +66,9 @@ public class Alfred extends Activity
         // This will show the recognized text.
         resultView = (TextView)findViewById(R.id.result);
  
-// if first time:
-//        alert("note", "pair or wake the bluetooth speaker");
+// show only if first time:
+//        alert("note:", "pair or wake the bluetooth speaker");
+        
         setupSpeechService();
         
     }
@@ -79,13 +80,12 @@ public class Alfred extends Activity
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//        setupSpeechService();
+ //       setupSpeechService();
         ATTSpeechService speechService = getSpeechService();
         speechService.startListening();            				
 	}
     /** Convenience routine to get speech service. **/
-    private ATTSpeechService getSpeechService()
-    {
+    private ATTSpeechService getSpeechService() {
         return ATTSpeechService.getSpeechService(this);
     }
     
@@ -123,7 +123,7 @@ public class Alfred extends Activity
 //        speakButton.setText(R.string.speak_button);
 //        speakButton.setEnabled(true);
         // Make Text to Speech request that will speak out a greeting.
-//        startTTS(getString(R.string.greeting));
+        startTTS(getString(R.string.greeting));
         waitForTTS();
         
 //        setupSpeechService();
@@ -205,7 +205,7 @@ public class Alfred extends Activity
         speechService.setSpeechErrorListener(new ErrorListener());
         speechService.setSpeechStateListener(new StateListener());
 
-        speechService.setShowUI(false);
+        speechService.setShowUI(true);
         
         try {
             speechService.setRecognitionURL(new URI(SpeechConfig.recognitionUrl()));
@@ -215,11 +215,11 @@ public class Alfred extends Activity
         }
         
         // Specify the speech context for this app.
-        speechService.setSpeechContext("QuestionAndAnswer");
+        speechService.setSpeechContext("VoiceMail");
         
         speechService.setMaxInitialSilence(Integer.MAX_VALUE);
         speechService.setMinRecordingTime(0);
-        speechService.setMaxRecordingTime(Integer.MAX_VALUE);
+        speechService.setMaxRecordingTime(60000);
         
         // Set the OAuth token that was fetched in the background.
         speechService.setBearerAuthToken(oauthToken);
@@ -282,9 +282,9 @@ public class Alfred extends Activity
 	        		||resultText.equals("ali")) {
 	        	//hkservice.sendPause(); // currently works with only a hard coded track
 	        	Intent intent = new Intent("com.android.music.musicservicecommand");
+	            startTTS("yes?");
 	        	intent.putExtra("command", "pause");
 	        	sendBroadcast(intent);
-	            startTTS("yes?");
 	            commandMode = true;
 	        }
             waitForTTS();
@@ -336,19 +336,19 @@ public class Alfred extends Activity
 		public void onStateChanged(SpeechState state) {
 			if(state.equals(SpeechState.PROCESSING)) {
 				Log.e(TAG,"processing....");
-				resultView.setText("processing");
+//				resultView.setText("processing");
 				isResponse=false;
 			} else if(state.equals(SpeechState.RECORDING)) {
 				Log.e(TAG,"listening....");
-				resultView.setText("listening");
+//				resultView.setText("listening");
 				isResponse=false;
 			} else if(state.equals(SpeechState.ERROR)) {
 				Log.e(TAG,"error....");
-				resultView.setText("error");
+//				resultView.setText("error");
                 startListening();
 			} else if(state.equals(SpeechState.IDLE)) {
 				Log.e(TAG,"idle....");
-				resultView.setText("idle");
+//				resultView.setText("idle");
 				if(!isResponse) {
 					Log.e(TAG,"re-startListening....");
 					startListening();

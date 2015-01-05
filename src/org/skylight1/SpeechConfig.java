@@ -8,8 +8,8 @@ package org.skylight1;
 
 /** Configuration parameters for this application's account on Speech API. **/
 public class SpeechConfig {
-    private static final String MY_OBFUSCATED_CLIENT_ID = "y1y3p2jb17impkknf18qjhss750avgin";
-	private static final String MY_OBFUSCATED_CLIENT_SECRET = "restsasegjzyef29hb7da4oavgtjezkl";
+    private static final String MY_OBFUSCATED_CLIENT_ID = "9gmzowcndlmhvmhcswqat2z9cvkeiwxv";
+	private static final String MY_OBFUSCATED_CLIENT_SECRET = "3tuxq8eoxifoxlep3ivhkutd9alsqzlb";
 
     private SpeechConfig() {} // can't instantiate
     
